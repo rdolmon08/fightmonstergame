@@ -67,7 +67,7 @@ const locations = [
   {
     name: "kill monster",
     "button text": ["Go to town square", "Go to town square", "Go to town square"],
-    "button functions": [goTown, goTown, goTown],
+    "button functions": [goTown, goTown, easterEgg],
     text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
   },
   {
@@ -263,6 +263,7 @@ function pickTwo() {
 function pickEight() {
   pick(8);
 }
+
 function pick(guess) {
   const numbers = [];
   while (numbers.length < 10) {
@@ -273,6 +274,15 @@ function pick(guess) {
     text.innerText += numbers[i] + "\n";
   }
   if (numbers.includes(guess)) {
-
+    text.innerText += "Right! You win 20 gold!";
+    gold += 20;
+    goldText.innerText = gold;
+  } else {
+    text.innerText += "Wrong! You lose 10 health!";
+    health -= 10;
+    healthText.innerText = health;
+    if (health <= 0) {
+      lose();
+    }
   }
 }
